@@ -1,0 +1,5 @@
+./docker/nginx/
+./.idea
+./docker/storage
+
+./src/.env
