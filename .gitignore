@@ -76,10 +76,10 @@ fabric.properties
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#PhpStorm,php
 
-../docker/storage/mysql/
+docker/storage/
 
 
-.env
+src/.env
 tests/
 vendor/
 .idea/
