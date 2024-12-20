@@ -76,8 +76,12 @@ fabric.properties
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#PhpStorm,php
 
-../docker/storage/mysql
+../docker/storage/mysql/
+
 
 .env
-
-src/tests/
+tests/
+vendor/
+.idea/
+.phpunit.result.cache
+phpunit.xml
