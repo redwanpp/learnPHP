@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class GatewayService
+class PaymentGatewayService
 {
 
     public function __construct()
@@ -11,7 +11,7 @@ class GatewayService
 
     public function charge(array $customer, float $amout, float $tax): bool
     {
-        sleep(1);
+//        sleep(1);
 
         return (bool) mt_rand(0, 1);
     }

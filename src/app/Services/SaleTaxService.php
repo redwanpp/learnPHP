@@ -11,7 +11,7 @@ class SaleTaxService
 
     public function calculate(float $amout, array $customer)
     {
-        sleep(1);
+//        sleep(1);
 
         return $amout * 6.5 / 100;
     }

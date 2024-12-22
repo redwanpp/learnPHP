@@ -7,9 +7,9 @@ namespace App\Services;
 class InvoiceService
 {
     public function __construct(
-        protected SaleTaxService $saleTaxService,
-        protected GatewayService $gatewayService,
-        protected EmailService $emailService
+        protected SaleTaxService        $saleTaxService,
+        protected PaymentGatewayService $gatewayService,
+        protected EmailService          $emailService
     )
     {
     }
@@ -22,7 +22,9 @@ class InvoiceService
             return false;
         }
 
-        $this->emailService->sendEmail($customer, 'receipt');
+        $this->emailService->send($customer, 'receipt');
+
+        echo "Invoice has been processed <br>";
 
         return true;
     }
