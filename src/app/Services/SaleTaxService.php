@@ -9,11 +9,11 @@ class SaleTaxService
     {
     }
 
-    public function calculate(float $amout, array $customer)
+    public function calculate(float $amount, array $customer)
     {
 //        sleep(1);
 
-        return $amout * 6.5 / 100;
+        return $amount * 6.5 / 100;
     }
 
 
