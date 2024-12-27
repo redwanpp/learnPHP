@@ -1,19 +1,26 @@
-<?php /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
+<?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace App;
 
 use App\Exceptions\RouteNotFoundException;
-
+use App\Services\StripePayment;
+use App\Services\PaymentGatewayServiceInterface;
 
 class App
 {
     private static DB $db;
 
-    public function __construct (protected Router $router, protected array $request, protected Config $config)
-    {
-        static::$db        = new DB($config->db ?? []);
+    public function __construct(
+        protected Container $container,
+        protected Router $router,
+        protected array $request,
+        protected Config $config
+    ) {
+        static::$db = new DB($config->db ?? []);
+
+        $this->container->set(PaymentGatewayServiceInterface::class, StripePayment::class);
     }
 
     public static function db(): DB
@@ -21,16 +28,14 @@ class App
         return static::$db;
     }
 
-
-    public function run(): void
+    public function run()
     {
         try {
             echo $this->router->resolve($this->request['uri'], strtolower($this->request['method']));
-    } catch (RouteNotFoundException) {
-        http_response_code(404);
+        } catch (RouteNotFoundException) {
+            http_response_code(404);
 
-        echo View::make('error/404');
+            echo View::make('error/404');
         }
     }
-
 }

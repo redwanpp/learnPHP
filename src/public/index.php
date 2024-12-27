@@ -2,6 +2,7 @@
 
 use App\App;
 use App\Config;
+use App\Container;
 use App\Controllers\HomeController;
 use App\controllers\InvoiceController;
 use App\Router;
@@ -14,16 +15,18 @@ $dotenv->load();
 const STORAGE_PATH = __DIR__ . "/../storage/";
 const VIEW_PATH = __DIR__ . "/../views";
 
-$router = new Router();
+$container = new Container();
+$router = new Router($container);
 
 $router
     ->get('/', [HomeController::class, 'index'])
-    ->get('/invoices', [InvoiceController::class, 'index'])
-    ->get('/invoices/create', [InvoiceController::class, 'create'])
-    ->post('/invoices/create', [InvoiceController::class, 'store']);
+    ->get('/examples/generator', [\App\controllers\GeneratorController::class, 'index']);
 
 
 
-(new App($router, ['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
+(new App(
+    $container,
+    $router,
+    ['uri' => $_SERVER['REQUEST_URI'], 'method' => $_SERVER['REQUEST_METHOD']],
     new Config($_ENV)
 ))->run();

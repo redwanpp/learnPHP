@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class SaleTaxService
+class SalesTaxService
 {
 
     public function __construct()
